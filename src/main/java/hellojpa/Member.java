@@ -14,17 +14,13 @@ public class Member {
     private String username;
 
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
+    @JoinColumn(name = "TEAM_ID",insertable = false,updatable = false)
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
-    public void changeTeam(Team team) {
-        this.team = team;
-        team.getMembers().add(this);
-    }
-    public Team getTeam() {
-        return team;
-    }
     public void setId(Long id) {
         this.id = id;
     }
