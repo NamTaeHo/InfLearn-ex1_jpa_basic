@@ -19,15 +19,24 @@ public class JpaMain {
         tx.begin();
 
         try {
-            //Member findmember = em.find(Member.class, 1L);
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(1)
-                    .setMaxResults(1000)
-                    .getResultList();
 
-            for (Member member : result) {
-                System.out.println("member.getName() = " + member.getName());
-            }
+            Member member1 = new Member();
+            Member member2 = new Member();
+            Member member3 = new Member();
+            member1.setUsername("BABo");
+            member2.setUsername("TAEHO");
+            member3.setUsername("BYUNGSUNG");
+            member1.setRoleType(RoleType.ADMIN);
+            member2.setRoleType(RoleType.USER);
+            member3.setRoleType(RoleType.USER);
+            System.out.println("===================================");
+            em.persist(member1);
+            em.persist(member2);
+            em.persist(member3);
+
+            System.out.println("===================================");
+
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
@@ -37,4 +46,3 @@ public class JpaMain {
         emf.close();
     }
 }
-
