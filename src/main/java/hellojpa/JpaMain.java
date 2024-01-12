@@ -22,35 +22,21 @@ public class JpaMain {
         try {
 
 
-            Member member = new Member();
-            member.setUsername("hello");
+            Parent parent = new Parent();
 
-            Team team = new Team();
-            team.setName("TeamA");
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            em.persist(member);
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
 
             em.flush();
             em.clear();
 
-            List<Member> members = em.createQuery("select m from Member m join fetch m.team ", Member.class )
-                    .getResultList();
-
-
-
-
-            //
-            //
-            //Member findMember = em.find(Member.class, member.getId());
-            //Member findMember = em.getReference(Member.class, member.getId());
-            //System.out.println("findMember.getClass = " + findMember.getClass()); // 프록시 강제 초기화
-            //System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember)); //프록시 인스턴스 초기화 여부 확인
-
-            //Hibernate.initialize(findMember);// 강제 초기화
-
-
-
-
+            Parent findParent = em.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0);
 
             tx.commit();
         } catch (Exception e) {
