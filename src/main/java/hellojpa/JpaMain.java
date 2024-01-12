@@ -1,10 +1,10 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
+import org.hibernate.jpa.internal.PersistenceUnitUtilImpl;
+
 import javax.lang.model.SourceVersion;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,14 +23,22 @@ public class JpaMain {
 
 
             Member member = new Member();
-            member.setUsername("a");
-            member.setCreateBy("kim");
-            member.setCreateDate(LocalDateTime.now());
+            member.setUsername("hello");
 
             em.persist(member);
 
             em.flush();
             em.clear();
+
+            //
+            //
+            //Member findMember = em.find(Member.class, member.getId());
+            Member findMember = em.getReference(Member.class, member.getId());
+            System.out.println("findMember.getClass = " + findMember.getClass()); // 프록시 강제 초기화
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember)); //프록시 인스턴스 초기화 여부 확인
+
+            Hibernate.initialize(findMember);// 강제 초기화
+
 
 
 
