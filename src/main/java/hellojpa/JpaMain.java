@@ -7,6 +7,7 @@ import javax.lang.model.SourceVersion;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
 
@@ -21,22 +22,52 @@ public class JpaMain {
 
         try {
 
+            Member member = new Member();
+            member.setUsername("member1");
 
-            Parent parent = new Parent();
 
-            Child child1 = new Child();
-            Child child2 = new Child();
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("피자");
 
-            parent.addChild(child1);
-            parent.addChild(child2);
+            member.getAddressHistory().add(new AddressEntity("old1","street","10000"));
+            member.getAddressHistory().add(new AddressEntity("old2","street","10000"));
 
-            em.persist(parent);
+
+
+
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            Parent findParent = em.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);
+            System.out.println("===================== START ======================");
+
+
+            Member findMember = em.find(Member.class, member.getId());
+
+            Set<String> favoriteFoods = findMember.getFavoriteFoods();
+            for (String favoriteFood : favoriteFoods) {
+                System.out.println("favoriteFood = " + favoriteFood);
+                
+            }
+
+            System.out.println("==================== FINISH ======================");
+
+
+
+
+            System.out.println("================== REAL FINISH ====================");
+
+
+            //치킨을 한식으로 수정
+            findMember.getFavoriteFoods().remove("치킨");
+            findMember.getFavoriteFoods().add("한식");
+
+            System.out.println("================== UPDATE ====================");
+
+
+
 
             tx.commit();
         } catch (Exception e) {
