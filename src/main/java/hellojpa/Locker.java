@@ -9,6 +9,7 @@ public class Locker {
     @Column(name = "LOCKER_ID")
     private Long id;
 
+    @Column(name = "LOCKER_NAME")
     private String name;
 
     @OneToOne(mappedBy = "locker")
