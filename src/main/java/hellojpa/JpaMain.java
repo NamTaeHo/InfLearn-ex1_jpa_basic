@@ -25,19 +25,28 @@ public class JpaMain {
             Member member = new Member();
             member.setUsername("hello");
 
+            Team team = new Team();
+            team.setName("TeamA");
+
             em.persist(member);
 
             em.flush();
             em.clear();
 
+            List<Member> members = em.createQuery("select m from Member m join fetch m.team ", Member.class )
+                    .getResultList();
+
+
+
+
             //
             //
             //Member findMember = em.find(Member.class, member.getId());
-            Member findMember = em.getReference(Member.class, member.getId());
-            System.out.println("findMember.getClass = " + findMember.getClass()); // 프록시 강제 초기화
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember)); //프록시 인스턴스 초기화 여부 확인
+            //Member findMember = em.getReference(Member.class, member.getId());
+            //System.out.println("findMember.getClass = " + findMember.getClass()); // 프록시 강제 초기화
+            //System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(findMember)); //프록시 인스턴스 초기화 여부 확인
 
-            Hibernate.initialize(findMember);// 강제 초기화
+            //Hibernate.initialize(findMember);// 강제 초기화
 
 
 
