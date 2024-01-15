@@ -11,12 +11,12 @@ public class Address {
     private String street;
 
 
-
     private String zipcode;
 
 
     public Address() {
     }
+
     public Address(String city, String street, String zipcode) {
         this.city = city;
         this.street = street;
@@ -28,7 +28,6 @@ public class Address {
     }
 
 
-
     public String getStreet() {
         return street;
     }
@@ -38,9 +37,9 @@ public class Address {
     }
 
     @Override //값타입 비교 함수
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(o == null || this.getClass() != o.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
         Address address = (Address) o;
         return Objects.equals(city, address.city) &&
                 Objects.equals(street, address.street) &&
@@ -48,12 +47,9 @@ public class Address {
     }
 
     @Override //비교시 해시맵 같은 곳에서 필요함 없으면 안됨
-    public int hashCode(){
-        return Objects.hash(city,street,zipcode);
+    public int hashCode() {
+        return Objects.hash(city, street, zipcode);
     }
-
-
-
 
 
 }

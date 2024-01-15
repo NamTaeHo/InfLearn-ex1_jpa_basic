@@ -30,10 +30,8 @@ public class JpaMain {
             member.getFavoriteFoods().add("족발");
             member.getFavoriteFoods().add("피자");
 
-            member.getAddressHistory().add(new AddressEntity("old1","street","10000"));
-            member.getAddressHistory().add(new AddressEntity("old2","street","10000"));
-
-
+            member.getAddressHistory().add(new AddressEntity("old1", "street", "10000"));
+            member.getAddressHistory().add(new AddressEntity("old2", "street", "10000"));
 
 
             em.persist(member);
@@ -49,12 +47,10 @@ public class JpaMain {
             Set<String> favoriteFoods = findMember.getFavoriteFoods();
             for (String favoriteFood : favoriteFoods) {
                 System.out.println("favoriteFood = " + favoriteFood);
-                
+
             }
 
             System.out.println("==================== FINISH ======================");
-
-
 
 
             System.out.println("================== REAL FINISH ====================");
@@ -65,8 +61,6 @@ public class JpaMain {
             findMember.getFavoriteFoods().add("한식");
 
             System.out.println("================== UPDATE ====================");
-
-
 
 
             tx.commit();

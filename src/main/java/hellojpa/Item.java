@@ -7,7 +7,8 @@ import javax.persistence.*;
 @DiscriminatorColumn //Dtype 노출
 public abstract class Item {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;
 

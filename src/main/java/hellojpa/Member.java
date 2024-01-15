@@ -31,8 +31,6 @@ public class Member {
     private Address homeAddress;
 
 
-
-
     public Set<String> getFavoriteFoods() {
         return favoriteFoods;
     }
@@ -90,7 +88,6 @@ public class Member {
     public void setLocker(Locker locker) {
         this.locker = locker;
     }
-
 
 
     public void setHomeAddress(Address homeAddress) {

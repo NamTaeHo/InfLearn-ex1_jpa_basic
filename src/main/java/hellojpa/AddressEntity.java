@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class AddressEntity {
 
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "ADDRESS_ENTITY_ID")
     private Long id;
 
@@ -22,8 +23,8 @@ public class AddressEntity {
     }
 
 
-    public AddressEntity(String city, String street,String zipcode){
-        this.address = new Address(city, street,zipcode);
+    public AddressEntity(String city, String street, String zipcode) {
+        this.address = new Address(city, street, zipcode);
     }
 
     public AddressEntity() {
